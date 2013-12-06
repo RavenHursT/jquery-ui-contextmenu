@@ -1,3 +1,5 @@
+define(['jquery', 'jqueryUi/widget', 'jqueryUi/menu'], function($) {
+
 /*******************************************************************************
  * jquery.ui-contextmenu.js plugin.
  *
@@ -342,4 +344,6 @@ $.extend($.moogle.contextmenu, {
 	}
 });
 
-}(jQuery, window, document));
+}($, window, document));
+
+});
