@@ -38,7 +38,8 @@ define(['jquery', 'jqueryUi/widget', 'jqueryUi/menu'], function($) {
 			createMenu: $.noop,   // menu was initialized (original UI Menu)
 			focus: $.noop,        // menu option got focus
 			open: $.noop,         // menu was opened
-			select: $.noop        // menu option was selected; return `false` to prevent closing
+			select: $.noop,        // menu option was selected; return `false` to prevent closing
+			manualClose: false	  // keep menus open until explicitly closed by consumers.
 		},
 		/** Constructor */
 		_create: function () {
@@ -74,7 +75,8 @@ define(['jquery', 'jqueryUi/widget', 'jqueryUi/menu'], function($) {
 			}
 			this._createUiMenu(opts.menu);
 
-			eventNames = "contextmenu" + this.eventNamespace;
+			//TODO: make an option for defining menu open event 'trigger' --mmarcus
+			eventNames = "contextMenu" + this.eventNamespace;
 			if(opts.taphold){
 				eventNames += " taphold" + this.eventNamespace;
 			}
@@ -169,12 +171,16 @@ define(['jquery', 'jqueryUi/widget', 'jqueryUi/menu'], function($) {
 				if( event.which === $.ui.keyCode.ESCAPE ){
 					self._closeMenu();
 				}
-			}).bind("mousedown" + this.eventNamespace + " touchstart" + this.eventNamespace, function(event){
-				// Close menu when clicked outside menu
-				if( !$(event.target).closest(".ui-menu-item").length ){
-					self._closeMenu();
-				}
 			});
+
+			if(!this.options.manualClose){
+				$(document).bind("mousedown" + this.eventNamespace + " touchstart" + this.eventNamespace, function(event){
+					// Close menu when clicked outside menu
+					if( !$(event.target).closest(".ui-menu-item").length ){
+						self._closeMenu();
+					}
+				});
+			}
 
 			// required for custom positioning (issue #18 and #13).
 			if ($.isFunction(posOption)) {
@@ -255,7 +261,7 @@ define(['jquery', 'jqueryUi/widget', 'jqueryUi/menu'], function($) {
 		/** Open context menu on a specific target (must match options.delegate) */
 		open: function(target){
 			// Fake a 'contextmenu' event
-			var e = jQuery.Event("contextmenu", {target: target.get(0)});
+			var e = jQuery.Event("contextMenu", {target: target.get(0)});
 			return this.element.trigger(e);
 		},
 		/** Replace the menu altogether. */
