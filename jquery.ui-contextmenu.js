@@ -327,6 +327,9 @@ $.extend($.moogle.contextmenu, {
 				$a.data(entry.data);
 			}
 		}
+
+		//put original menu definition on DOM element --mmarcus
+		$parentLi.data(entry);
 		return $a;
 	},
 	/** Convert a nested array of command objects into a <ul> structure. */
