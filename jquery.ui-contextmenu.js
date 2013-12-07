@@ -261,7 +261,7 @@ define(['jquery', 'jqueryUi/widget', 'jqueryUi/menu'], function($) {
 		/** Open context menu on a specific target (must match options.delegate) */
 		open: function(target){
 			// Fake a 'contextmenu' event
-			var e = jQuery.Event("contextMenu", {target: target.get(0)});
+			var e = $.Event("contextMenu", {target: target.get(0)});
 			return this.element.trigger(e);
 		},
 		/** Replace the menu altogether. */
