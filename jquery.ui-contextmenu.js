@@ -238,6 +238,11 @@ define(['jquery', 'jqueryUi/widget', 'jqueryUi/menu'], function($) {
 			var $entry = this.$menu.find("li a[href=#" + normCommand(cmd) + "]");
 			return wantLi ? $entry.closest("li") : $entry;
 		},
+		/** Return ui-menu entry (<A> or <LI> tag). */
+		getMenuEntries: function(wantLi){
+			var $entry = this.$menu.find("li a");
+			return wantLi ? $entry.closest("li") : $entry;
+		},
 		/** Close context menu. */
 		close: function(){
 			if(this.isOpen()){
