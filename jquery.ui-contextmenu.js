@@ -234,7 +234,7 @@ define(['jquery', 'jqueryUi/widget', 'jqueryUi/menu'], function($) {
 			$.Widget.prototype._setOption.apply(this, arguments);
 		},
 		/** Return ui-menu entry (<A> or <LI> tag). */
-		_getMenuEntry: function(cmd, wantLi){
+		getMenuEntry: function(cmd, wantLi){
 			var $entry = this.$menu.find("li a[href=#" + normCommand(cmd) + "]");
 			return wantLi ? $entry.closest("li") : $entry;
 		},
@@ -251,7 +251,7 @@ define(['jquery', 'jqueryUi/widget', 'jqueryUi/menu'], function($) {
 		},
 		/** Enable or disable the menu command. */
 		enableEntry: function(cmd, flag){
-			this._getMenuEntry(cmd, true).toggleClass("ui-state-disabled", (flag === false));
+			this.getMenuEntry(cmd, true).toggleClass("ui-state-disabled", (flag === false));
 		},
 		/** Redefine the whole menu. */
 		/** Return Menu element (UL). */
@@ -276,7 +276,7 @@ define(['jquery', 'jqueryUi/widget', 'jqueryUi/menu'], function($) {
 		/** Redefine menu entry (title or all of it). */
 		setEntry: function(cmd, titleOrData){
 			var $parent,
-				$entry = this._getMenuEntry(cmd, false);
+				$entry = this.getMenuEntry(cmd, false);
 
 			if(typeof titleOrData === "string"){
 				if( $entry.children("span").length){
@@ -298,7 +298,7 @@ define(['jquery', 'jqueryUi/widget', 'jqueryUi/menu'], function($) {
 		},
 		/** Show or hide the menu command. */
 		showEntry: function(cmd, flag){
-			this._getMenuEntry(cmd, true).toggle(flag !== false);
+			this.getMenuEntry(cmd, true).toggle(flag !== false);
 		}
 	});
 
