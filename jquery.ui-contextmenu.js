@@ -244,9 +244,9 @@ define(['jquery', 'jqueryUi/widget', 'jqueryUi/menu'], function($) {
 			return wantLi ? $entry.closest("li") : $entry;
 		},
 		/** Close context menu. */
-		close: function(){
+		close: function(immediately){
 			if(this.isOpen()){
-				this._closeMenu();
+				this._closeMenu(immediately);
 			}
 		},
 		/** Enable or disable the menu command. */
